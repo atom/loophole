@@ -7,3 +7,11 @@ exports.allowUnsafeEval = (fn) ->
     fn()
   finally
     global.eval = previousEval
+
+exports.allowUnsafeNewFunction = (fn) ->
+  previousFunction = global.Function
+  try
+    global.Function = (source) -> vm.runInThisContext(source)
+    fn()
+  finally
+    global.Function = Function
