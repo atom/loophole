@@ -1,6 +1,6 @@
 {
   "name": "loophole",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "A hack to enable use of libraries that depend on a basic form of eval in Atom",
   "main": "./lib/loophole.js",
   "scripts": {
