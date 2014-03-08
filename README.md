@@ -5,10 +5,13 @@ of `eval` semantics to work in Atom with a content security policy that forbids
 calls to `eval`.
 
 ```coffee
-{allowUnsafeEval} = require 'loophole'
+{allowUnsafeEval, allowUnsafeNewFunction} = require 'loophole'
 
 allowUnsafeEval ->
-  crazyLibrary.exploitLoophole()
+  crazyLibrary.exploitLoophole() # allows `eval(...)`
+
+allowUnsafeNewFunction ->
+  crazyLibrary.exploitLoophole() # allows `new Function(...)`
 ```
 
 ## How?
