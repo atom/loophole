@@ -14,4 +14,4 @@ exports.allowUnsafeNewFunction = (fn) ->
     global.Function = (source) -> vm.runInThisContext(source)
     fn()
   finally
-    global.Function = Function
+    global.Function = previousFunction
