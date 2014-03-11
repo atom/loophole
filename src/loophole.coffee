@@ -11,7 +11,18 @@ exports.allowUnsafeEval = (fn) ->
 exports.allowUnsafeNewFunction = (fn) ->
   previousFunction = global.Function
   try
-    global.Function = (source) -> vm.runInThisContext(source)
+    global.Function = exports.Function
     fn()
   finally
     global.Function = previousFunction
+
+exports.Function = (paramLists..., body) ->
+  params = []
+  for paramList in paramLists
+    params.push(paramList.split(/\s*,\s*/)...)
+
+  vm.runInThisContext """
+    (function(#{params.join(', ')}) {
+      #{body}
+    })
+  """

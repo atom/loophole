@@ -14,11 +14,22 @@ allowUnsafeNewFunction ->
   crazyLibrary.exploitLoophole() # allows `new Function(...)`
 ```
 
+You can also use the exported `Function` constructor directly:
+
+```coffee
+{Function} = require 'loophole'
+f = new Function("return 1 + 1;")
+```
+
 ## How?
 
-It replaces `eval` with a call two `vm.runInThisContext`, which won't perfectly
-emulate `eval` but is good enough in certain circumstances, like compiling
-[PEG.js][peg-js] grammars.
+`allowUnsafeEval` replaces `eval` with a call to `vm.runInThisContext`, which
+won't perfectly emulate `eval` but is good enough in certain circumstances, like
+compiling [PEG.js][peg-js] grammars.
+
+`allowUnsafeNewFunction` temporarily replaces `global.Function` with
+`loophole.Function`, which passes the source of the desired function to
+`vm.runInThisContext`.
 
 ## Why?
 
