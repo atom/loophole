@@ -19,7 +19,9 @@ exports.allowUnsafeNewFunction = (fn) ->
 exports.Function = (paramLists..., body) ->
   params = []
   for paramList in paramLists
-    params.push(paramList.split(/\s*,\s*/)...)
+    if typeof paramList is 'string'
+      paramList = paramList.split(/\s*,\s*/)
+    params.push(paramList...)
 
   vm.runInThisContext """
     (function(#{params.join(', ')}) {
