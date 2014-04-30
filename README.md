@@ -1,4 +1,4 @@
-# Eval Loophole
+# Eval Loophole [![Build Status](https://travis-ci.org/atom/loophole?branch=master)](https://travis-ci.org/atom/loophole)
 
 This is a hack to enable third-party libraries that depend on a limited subset
 of `eval` semantics to work in Atom with a content security policy that forbids
