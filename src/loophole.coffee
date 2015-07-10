@@ -28,3 +28,21 @@ exports.Function = (paramLists..., body) ->
       #{body}
     })
   """
+
+exports.allowUnsafeEvalAsync = (fn) ->
+  previousEval = global.eval
+  try
+    global.eval = (source) -> vm.runInThisContext(source)
+    callback = -> global.eval = previousEval
+    fn(callback)
+  catch e
+    global.eval = previousEval
+
+exports.allowUnsafeNewFunctionAsync = (fn) ->
+  previousFunction = global.Function
+  try
+    global.Function = exports.Function
+    callback = -> global.eval = global.eval = previousFunction
+    fn(callback)
+  catch e
+    global.Function = previousFunction
