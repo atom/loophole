@@ -28,3 +28,5 @@ exports.Function = (paramLists..., body) ->
       #{body}
     })
   """
+
+exports.Function:: = global.Function::

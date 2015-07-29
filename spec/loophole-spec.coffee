@@ -11,3 +11,15 @@ describe "Loophole", ->
       allowUnsafeNewFunction ->
         f = new Function("a, b", "c", "return a + b + c;")
         expect(f(1, 2, 3)).toBe 6
+
+    it "supports Function.prototype.call", ->
+      allowUnsafeNewFunction ->
+        expect(Function::call).toBeDefined()
+        f = new Function("a, b", "c", "return a + b + c;")
+        expect(Function::call.call(f, null, 1, 2, 3)).toBe 6
+
+    it "supports Function.prototype.apply", ->
+      allowUnsafeNewFunction ->
+        expect(Function::apply).toBeDefined()
+        f = new Function("a, b", "c", "return a + b + c;")
+        expect(Function::apply.call(f, null, [1, 2, 3])).toBe 6
