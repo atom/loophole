@@ -14,12 +14,7 @@
   "bugs": {
     "url": "https://github.com/atom/loophole/issues"
   },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "http://github.com/atom/loophole/raw/master/LICENSE.md"
-    }
-  ],
+  "license": "MIT",
   "devDependencies": {
     "coffee-script": "~1.7.0",
     "jasmine-focused": "1.x",
