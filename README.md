@@ -10,8 +10,26 @@ calls to `eval`.
 allowUnsafeEval ->
   crazyLibrary.exploitLoophole() # allows `eval(...)`
 
+allowUnsafeEval (callback) ->
+  # async operations
+  setTimeout (
+    ->
+      crazyLibrary.exploitLoophole()
+      callback() # you are done
+    100
+  )
+
 allowUnsafeNewFunction ->
   crazyLibrary.exploitLoophole() # allows `new Function(...)`
+
+allowUnsafeNewFunction (callback) ->
+  # async operations
+  setTimeout (
+    ->
+      crazyLibrary.exploitLoophole()
+      callback() # you are done
+    100
+  )
 ```
 
 You can also use the exported `Function` constructor directly:
