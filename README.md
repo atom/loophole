@@ -1,4 +1,5 @@
-# Eval Loophole [![Build Status](https://travis-ci.org/atom/loophole.svg?branch=master)](https://travis-ci.org/atom/loophole)
+##### Atom and all repositories under Atom will be archived on December 15, 2022. Learn more in our [official announcement](https://github.blog/2022-06-08-sunsetting-atom/)
+ # Eval Loophole [![Build Status](https://travis-ci.org/atom/loophole.svg?branch=master)](https://travis-ci.org/atom/loophole)
 
 This is a hack to enable third-party libraries that depend on a limited subset
 of `eval` semantics to work in Atom with a content security policy that forbids
