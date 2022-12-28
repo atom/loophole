@@ -28,7 +28,47 @@ describe "Loophole", ->
       result = allowUnsafeNewFunction -> 42
       expect(result).toBe 42
 
+    it "works with async callback", ->
+      result = null
+
+      runs ->
+        allowUnsafeNewFunction (callback) ->
+          setTimeout(
+            ->
+              result = 42
+              callback()
+            100
+          )
+
+      waitsFor(
+        -> result
+        "result"
+        200
+      )
+
+      runs -> expect(result).toBe 42
+
   describe "allowUnsafeEval", ->
     it "returns the value that its body function returns", ->
       result = allowUnsafeEval -> 42
       expect(result).toBe 42
+
+    it "works with async callback", ->
+      result = null
+
+      runs ->
+        allowUnsafeEval (callback) ->
+          setTimeout(
+            ->
+              result = 42
+              callback()
+            100
+          )
+
+      waitsFor(
+        -> result
+        "result"
+        200
+      )
+
+      runs -> expect(result).toBe 42

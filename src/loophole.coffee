@@ -2,19 +2,35 @@ vm = require 'vm'
 
 exports.allowUnsafeEval = (fn) ->
   previousEval = global.eval
+  callback = -> global.eval = previousEval
+  error = false
   try
     global.eval = (source) -> vm.runInThisContext(source)
-    fn()
+    fn(callback)
+
+  catch err
+    error = true
+    callback()
+
   finally
-    global.eval = previousEval
+    if !fn.length and !error
+      callback()
 
 exports.allowUnsafeNewFunction = (fn) ->
   previousFunction = global.Function
+  callback = -> global.eval = previousFunction
+  error = false
   try
     global.Function = exports.Function
-    fn()
+    fn(callback)
+
+  catch err
+    error = true
+    callback()
+
   finally
-    global.Function = previousFunction
+    if !fn.length and !error
+      callback()
 
 exports.Function = (paramLists..., body) ->
   params = []
